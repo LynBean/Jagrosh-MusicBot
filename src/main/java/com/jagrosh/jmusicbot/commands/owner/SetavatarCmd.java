@@ -32,8 +32,8 @@ public class SetavatarCmd extends OwnerCommand
     public SetavatarCmd(Bot bot)
     {
         this.name = "setavatar";
-        this.help = "sets the avatar of the bot";
-        this.arguments = "<url>";
+        this.help = "设置机器人头像 | Sets the avatar of the bot";
+        this.arguments = "<链接URL>";
         this.aliases = bot.getConfig().getAliases(this.name);
         this.guildOnly = false;
     }
@@ -52,16 +52,16 @@ public class SetavatarCmd extends OwnerCommand
         InputStream s = OtherUtil.imageFromUrl(url);
         if(s==null)
         {
-            event.reply(event.getClient().getError()+" Invalid or missing URL");
+            event.reply(event.getClient().getError()+" 网址无效或缺失 | Invalid or missing URL");
         }
         else
         {
             try {
             event.getSelfUser().getManager().setAvatar(Icon.from(s)).queue(
-                    v -> event.reply(event.getClient().getSuccess()+" Successfully changed avatar."), 
-                    t -> event.reply(event.getClient().getError()+" Failed to set avatar."));
+                    v -> event.reply(event.getClient().getSuccess()+" 成功更换头像。| Successfully changed avatar."), 
+                    t -> event.reply(event.getClient().getError()+" 设置头像失败。| Failed to set avatar."));
             } catch(IOException e) {
-                event.reply(event.getClient().getError()+" Could not load from provided URL.");
+                event.reply(event.getClient().getError()+" 无法从提供的网址加载。| Could not load from provided URL.");
             }
         }
     }

@@ -31,8 +31,8 @@ public class RepeatCmd extends DJCommand
     {
         super(bot);
         this.name = "repeat";
-        this.help = "re-adds music to the queue when finished";
-        this.arguments = "[off|all|single]";
+        this.help = "完成后将音乐重新添加到队列中 | Re-adds music to the queue when finished";
+        this.arguments = "[关闭Off|全部All|单首Single]";
         this.aliases = bot.getConfig().getAliases(this.name);
         this.guildOnly = true;
     }
@@ -65,11 +65,11 @@ public class RepeatCmd extends DJCommand
         }
         else
         {
-            event.replyError("Valid options are `off`, `all` or `single` (or leave empty to toggle between `off` and `all`)");
+            event.replyError("有效选项为（关闭）`off`、（全部）`all`或（单首）`single`（或留空以在`off`和`all`之间切换）| Valid options are `off`, `all` or `single` (or leave empty to toggle between `off` and `all`)");
             return;
         }
         settings.setRepeatMode(value);
-        event.replySuccess("Repeat mode is now `"+value.getUserFriendlyName()+"`");
+        event.replySuccess("现在的重复模式是|Repeat mode is now `"+value.getUserFriendlyName()+"`");
     }
 
     @Override
