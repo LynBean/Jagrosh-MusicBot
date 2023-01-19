@@ -44,8 +44,8 @@ public class QueueCmd extends MusicCommand
     {
         super(bot);
         this.name = "queue";
-        this.help = "shows the current queue";
-        this.arguments = "[pagenum]";
+        this.help = "显示当前队列 | Shows the current queue";
+        this.arguments = "[页数Pagenum]";
         this.aliases = bot.getConfig().getAliases(this.name);
         this.bePlaying = true;
         this.botPermissions = new Permission[]{Permission.MESSAGE_ADD_REACTION,Permission.MESSAGE_EMBED_LINKS};
@@ -77,7 +77,7 @@ public class QueueCmd extends MusicCommand
             Message nowp = ah.getNowPlaying(event.getJDA());
             Message nonowp = ah.getNoMusicPlaying(event.getJDA());
             Message built = new MessageBuilder()
-                    .setContent(event.getClient().getWarning() + " There is no music in the queue!")
+                    .setContent(event.getClient().getWarning() + " 队列中没有音乐！| There is no music in the queue!")
                     .setEmbeds((nowp==null ? nonowp : nowp).getEmbeds().get(0)).build();
             event.reply(built, m -> 
             {
@@ -111,8 +111,8 @@ public class QueueCmd extends MusicCommand
             sb.append(ah.getStatusEmoji()).append(" **")
                     .append(ah.getPlayer().getPlayingTrack().getInfo().title).append("**\n");
         }
-        return FormatUtil.filter(sb.append(success).append(" Current Queue | ").append(songslength)
-                .append(" entries | `").append(FormatUtil.formatTime(total)).append("` ")
+        return FormatUtil.filter(sb.append(success).append(" 当前队列|Current Queue | ").append(songslength)
+                .append(" 歌曲|entries | `").append(FormatUtil.formatTime(total)).append("` ")
                 .append(repeatmode.getEmoji() != null ? "| "+repeatmode.getEmoji() : "").toString());
     }
 }

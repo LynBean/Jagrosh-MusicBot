@@ -206,7 +206,7 @@ public class AudioHandler extends AudioEventAdapter implements AudioSendHandler
             Guild guild = guild(jda);
             AudioTrack track = audioPlayer.getPlayingTrack();
             MessageBuilder mb = new MessageBuilder();
-            mb.append(FormatUtil.filter(manager.getBot().getConfig().getSuccess()+" **Now Playing in "+guild.getSelfMember().getVoiceState().getChannel().getAsMention()+"...**"));
+            mb.append(FormatUtil.filter(manager.getBot().getConfig().getSuccess()+" **正在播放在 | Now Playing in "+guild.getSelfMember().getVoiceState().getChannel().getAsMention()+"...**"));
             EmbedBuilder eb = new EmbedBuilder();
             eb.setColor(guild.getSelfMember().getColor());
             RequestMetadata rm = getRequestMetadata();
@@ -251,9 +251,9 @@ public class AudioHandler extends AudioEventAdapter implements AudioSendHandler
     {
         Guild guild = guild(jda);
         return new MessageBuilder()
-                .setContent(FormatUtil.filter(manager.getBot().getConfig().getSuccess()+" **Now Playing...**"))
+                .setContent(FormatUtil.filter(manager.getBot().getConfig().getSuccess()+" **正在播放中 | Now Playing...**"))
                 .setEmbeds(new EmbedBuilder()
-                .setTitle("No music playing")
+                .setTitle("没有歌曲播放中 | No music playing")
                 .setDescription(STOP_EMOJI+" "+FormatUtil.progressBar(-1)+" "+FormatUtil.volumeIcon(audioPlayer.getVolume()))
                 .setColor(guild.getSelfMember().getColor())
                 .build()).build();
@@ -266,14 +266,14 @@ public class AudioHandler extends AudioEventAdapter implements AudioSendHandler
             long userid = getRequestMetadata().getOwner();
             AudioTrack track = audioPlayer.getPlayingTrack();
             String title = track.getInfo().title;
-            if(title==null || title.equals("Unknown Title"))
+            if(title==null || title.equals("未知标题 | Unknown Title"))
                 title = track.getInfo().uri;
-            return "**"+title+"** ["+(userid==0 ? "autoplay" : "<@"+userid+">")+"]"
+            return "**"+title+"** ["+(userid==0 ? "∞" : "<@"+userid+">")+"]"
                     + "\n" + getStatusEmoji() + " "
                     + "[" + FormatUtil.formatTime(track.getDuration()) + "] "
                     + FormatUtil.volumeIcon(audioPlayer.getVolume());
         }
-        else return "No music playing " + STOP_EMOJI + " " + FormatUtil.volumeIcon(audioPlayer.getVolume());
+        else return "没有歌曲播放中 | No music playing " + STOP_EMOJI + " " + FormatUtil.volumeIcon(audioPlayer.getVolume());
     }
     
     public String getStatusEmoji()

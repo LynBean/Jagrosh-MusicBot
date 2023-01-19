@@ -30,7 +30,7 @@ public class PauseCmd extends DJCommand
     {
         super(bot);
         this.name = "pause";
-        this.help = "pauses the current song";
+        this.help = "暂停当前歌曲 | Pauses the current song";
         this.aliases = bot.getConfig().getAliases(this.name);
         this.bePlaying = true;
     }
@@ -41,10 +41,10 @@ public class PauseCmd extends DJCommand
         AudioHandler handler = (AudioHandler)event.getGuild().getAudioManager().getSendingHandler();
         if(handler.getPlayer().isPaused())
         {
-            event.replyWarning("The player is already paused! Use `"+event.getClient().getPrefix()+"play` to unpause!");
+            event.replyWarning("播放器已经暂停！|The player is already paused! 输入|Use `"+event.getClient().getPrefix()+"play` 来取消暂停！|to unpause!");
             return;
         }
         handler.getPlayer().setPaused(true);
-        event.replySuccess("Paused **"+handler.getPlayer().getPlayingTrack().getInfo().title+"**. Type `"+event.getClient().getPrefix()+"play` to unpause!");
+        event.replySuccess("已暂停|Paused **"+handler.getPlayer().getPlayingTrack().getInfo().title+"**. 输入|Type `"+event.getClient().getPrefix()+"play` 来取消暂停！|to unpause!");
     }
 }

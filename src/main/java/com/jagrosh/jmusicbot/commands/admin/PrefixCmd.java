@@ -29,8 +29,8 @@ public class PrefixCmd extends AdminCommand
     public PrefixCmd(Bot bot)
     {
         this.name = "prefix";
-        this.help = "sets a server-specific prefix";
-        this.arguments = "<prefix|NONE>";
+        this.help = "设置服务器特定的前缀 | Sets a server-specific prefix";
+        this.arguments = "<前缀Prefix|空NONE>";
         this.aliases = bot.getConfig().getAliases(this.name);
     }
     
@@ -39,7 +39,7 @@ public class PrefixCmd extends AdminCommand
     {
         if(event.getArgs().isEmpty())
         {
-            event.replyError("Please include a prefix or NONE");
+            event.replyError("请包含前缀或（空）`NONE` | Please include a prefix or NONE");
             return;
         }
         
@@ -47,12 +47,12 @@ public class PrefixCmd extends AdminCommand
         if(event.getArgs().equalsIgnoreCase("none"))
         {
             s.setPrefix(null);
-            event.replySuccess("Prefix cleared.");
+            event.replySuccess("前缀清除。|Prefix cleared.");
         }
         else
         {
             s.setPrefix(event.getArgs());
-            event.replySuccess("Custom prefix set to `" + event.getArgs() + "` on *" + event.getGuild().getName() + "*");
+            event.replySuccess("自定义前缀设置为|Custom prefix set to `" + event.getArgs() + "` 在|on *" + event.getGuild().getName() + "*");
         }
     }
 }

@@ -33,8 +33,8 @@ public class AutoplaylistCmd extends OwnerCommand
         this.bot = bot;
         this.guildOnly = true;
         this.name = "autoplaylist";
-        this.arguments = "<name|NONE>";
-        this.help = "sets the default playlist for the server";
+        this.arguments = "<名称Name|空NONE>";
+        this.help = "设置服务器的默认播放列表 | Sets the default playlist for the server";
         this.aliases = bot.getConfig().getAliases(this.name);
     }
 
@@ -43,26 +43,26 @@ public class AutoplaylistCmd extends OwnerCommand
     {
         if(event.getArgs().isEmpty())
         {
-            event.reply(event.getClient().getError()+" Please include a playlist name or NONE");
+            event.reply(event.getClient().getError()+" 请包括一个播放列表名称或者放空 | Please include a playlist name or NONE");
             return;
         }
         if(event.getArgs().equalsIgnoreCase("none"))
         {
             Settings settings = event.getClient().getSettingsFor(event.getGuild());
             settings.setDefaultPlaylist(null);
-            event.reply(event.getClient().getSuccess()+" Cleared the default playlist for **"+event.getGuild().getName()+"**");
+            event.reply(event.getClient().getSuccess()+" 清除服务器的默认播放列表|Cleared the default playlist for **"+event.getGuild().getName()+"**");
             return;
         }
         String pname = event.getArgs().replaceAll("\\s+", "_");
         if(bot.getPlaylistLoader().getPlaylist(pname)==null)
         {
-            event.reply(event.getClient().getError()+" Could not find `"+pname+".txt`!");
+            event.reply(event.getClient().getError()+" 找不到文件！| Could not find `"+pname+".txt`!");
         }
         else
         {
             Settings settings = event.getClient().getSettingsFor(event.getGuild());
             settings.setDefaultPlaylist(pname);
-            event.reply(event.getClient().getSuccess()+" The default playlist for **"+event.getGuild().getName()+"** is now `"+pname+"`");
+            event.reply(event.getClient().getSuccess()+" 此服务器的默认播放列表|The default playlist for **"+event.getGuild().getName()+"** 现在是|is now `"+pname+"`");
         }
     }
 }
