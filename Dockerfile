@@ -21,8 +21,7 @@ ADD . .
 COPY --from=jda-builder /root/.m2/repository /root/.m2/repository
 COPY --from=jda-builder /app/build/libs /root/.m2/repository/com/jagrosh/jda-utilities/3.1.0
 
-RUN mvn clean
-RUN mvn install
+RUN mvn --batch-mode clean install
 
 # ---------------------------------------------
 # Create final image with only runtime dependencies
