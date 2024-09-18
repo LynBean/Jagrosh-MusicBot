@@ -29,7 +29,7 @@ public class SkipratioCmd extends AdminCommand
     public SkipratioCmd(Bot bot)
     {
         this.name = "setskip";
-        this.help = "sets a server-specific skip percentage";
+        this.help = "设置特定于服务器的跳过百分比";
         this.arguments = "<0 - 100>";
         this.aliases = bot.getConfig().getAliases(this.name);
     }
@@ -42,16 +42,16 @@ public class SkipratioCmd extends AdminCommand
             int val = Integer.parseInt(event.getArgs().endsWith("%") ? event.getArgs().substring(0,event.getArgs().length()-1) : event.getArgs());
             if( val < 0 || val > 100)
             {
-                event.replyError("The provided value must be between 0 and 100!");
+                event.replyError("提供的值必须在 0 到 100 之间！");
                 return;
             }
             Settings s = event.getClient().getSettingsFor(event.getGuild());
             s.setSkipRatio(val / 100.0);
-            event.replySuccess("Skip percentage has been set to `" + val + "%` of listeners on *" + event.getGuild().getName() + "*");
+            event.replySuccess("跳过百分比已设置为 `" + val + "%` 的听众人数在 *" + event.getGuild().getName() + "*");
         }
         catch(NumberFormatException ex)
         {
-            event.replyError("Please include an integer between 0 and 100 (default is 55). This number is the percentage of listening users that must vote to skip a song.");
+            event.replyError("请包含 0 到 100 之间的整数（默认为 55）。 这个数字是必须投票跳过歌曲的收听用户的百分比。");
         }
     }
 }

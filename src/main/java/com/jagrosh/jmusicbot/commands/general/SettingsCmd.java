@@ -39,7 +39,7 @@ public class SettingsCmd extends Command
     public SettingsCmd(Bot bot)
     {
         this.name = "settings";
-        this.help = "shows the bots settings";
+        this.help = "显示机器人设置";
         this.aliases = bot.getConfig().getAliases(this.name);
         this.guildOnly = true;
     }
@@ -51,27 +51,27 @@ public class SettingsCmd extends Command
         MessageBuilder builder = new MessageBuilder()
                 .append(EMOJI + " **")
                 .append(FormatUtil.filter(event.getSelfUser().getName()))
-                .append("** settings:");
+                .append("** 设置：");
         TextChannel tchan = s.getTextChannel(event.getGuild());
         VoiceChannel vchan = s.getVoiceChannel(event.getGuild());
         Role role = s.getRole(event.getGuild());
         EmbedBuilder ebuilder = new EmbedBuilder()
                 .setColor(event.getSelfMember().getColor())
-                .setDescription("Text Channel: " + (tchan == null ? "Any" : "**#" + tchan.getName() + "**")
-                        + "\nVoice Channel: " + (vchan == null ? "Any" : vchan.getAsMention())
-                        + "\nDJ Role: " + (role == null ? "None" : "**" + role.getName() + "**")
-                        + "\nCustom Prefix: " + (s.getPrefix() == null ? "None" : "`" + s.getPrefix() + "`")
-                        + "\nRepeat Mode: " + (s.getRepeatMode() == RepeatMode.OFF
+                .setDescription("文字频道： " + (tchan == null ? "全部" : "**#" + tchan.getName() + "**")
+                        + "\n语音频道： " + (vchan == null ? "全部" : vchan.getAsMention())
+                        + "\nDJ 角色： " + (role == null ? "没有" : "**" + role.getName() + "**")
+                        + "\n自定义前缀： " + (s.getPrefix() == null ? "没有" : "`" + s.getPrefix() + "`")
+                        + "\n循环模式： " + (s.getRepeatMode() == RepeatMode.OFF
                                                 ? s.getRepeatMode().getUserFriendlyName()
                                                 : "**"+s.getRepeatMode().getUserFriendlyName()+"**")
-                        + "\nQueue Type: " + (s.getQueueType() == QueueType.FAIR
+                        + "\n隊列類型： " + (s.getQueueType() == QueueType.FAIR
                                                 ? s.getQueueType().getUserFriendlyName()
                                                 : "**"+s.getQueueType().getUserFriendlyName()+"**")
-                        + "\nDefault Playlist: " + (s.getDefaultPlaylist() == null ? "None" : "**" + s.getDefaultPlaylist() + "**")
+                        + "\n默认播放列表： " + (s.getDefaultPlaylist() == null ? "没有" : "**" + s.getDefaultPlaylist() + "**")
                         )
-                .setFooter(event.getJDA().getGuilds().size() + " servers | "
+                .setFooter(event.getJDA().getGuilds().size() + " 服务器 | "
                         + event.getJDA().getGuilds().stream().filter(g -> g.getSelfMember().getVoiceState().inVoiceChannel()).count()
-                        + " audio connections", null);
+                        + " 语音链接", null);
         event.getChannel().sendMessage(builder.setEmbeds(ebuilder.build()).build()).queue();
     }
     

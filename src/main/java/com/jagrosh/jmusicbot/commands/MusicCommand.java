@@ -53,13 +53,13 @@ public abstract class MusicCommand extends Command
             {
                 event.getMessage().delete().queue();
             } catch(PermissionException ignore){}
-            event.replyInDm(event.getClient().getError()+" You can only use that command in "+tchannel.getAsMention()+"!");
+            event.replyInDm(event.getClient().getError()+" 您只能在该频道中使用该命令 "+tchannel.getAsMention()+"!");
             return;
         }
         bot.getPlayerManager().setUpHandler(event.getGuild()); // no point constantly checking for this later
         if(bePlaying && !((AudioHandler)event.getGuild().getAudioManager().getSendingHandler()).isMusicPlaying(event.getJDA()))
         {
-            event.reply(event.getClient().getError()+" There must be music playing to use that!");
+            event.reply(event.getClient().getError()+" 必须有音乐播放才能使用它！");
             return;
         }
         if(beListening)
@@ -70,14 +70,14 @@ public abstract class MusicCommand extends Command
             GuildVoiceState userState = event.getMember().getVoiceState();
             if(!userState.inVoiceChannel() || userState.isDeafened() || (current!=null && !userState.getChannel().equals(current)))
             {
-                event.replyError("You must be listening in "+(current==null ? "a voice channel" : current.getAsMention())+" to use that!");
+                event.replyError("你必须要在 "+(current==null ? "一个频道" : current.getAsMention())+" 聆听才能使用此命令！");
                 return;
             }
 
             VoiceChannel afkChannel = userState.getGuild().getAfkChannel();
             if(afkChannel != null && afkChannel.equals(userState.getChannel()))
             {
-                event.replyError("You cannot use that command in an AFK channel!");
+                event.replyError("您不能在 AFK 频道中使用该命令！");
                 return;
             }
 
@@ -89,7 +89,7 @@ public abstract class MusicCommand extends Command
                 }
                 catch(PermissionException ex) 
                 {
-                    event.reply(event.getClient().getError()+" I am unable to connect to "+userState.getChannel().getAsMention()+"!");
+                    event.reply(event.getClient().getError()+" 我无法连接到 "+userState.getChannel().getAsMention()+"!");
                     return;
                 }
             }
