@@ -1,6 +1,6 @@
 services:
     jagrosh-musicbot:
-        image: ghcr.io/lynbean/jagrosh-musicbot:docker
+        image: ghcr.io/lynbean/jagrosh-musicbot:latest
         container_name: jmusicbot
         restart: always
         volumes:
